@@ -1,12 +1,14 @@
-import { Hono } from "hono";
-import { routes } from "./routes";
+import app from "./app";
 
-const app = new Hono();
-
-app.get("/", (c) => {
-  return c.text("Hello Hono!");
+const server = Bun.serve({
+  port: process.env.PORT || 3000,
+  fetch: app.fetch,
 });
 
-routes(app);
+console.log("Scrowl Server Running ", server.port);
+
+// const key = ethers.Wallet.createRandom();
+// console.log(key.publicKey);
+// console.log(key.privateKey);
 
 export default app;
